@@ -23,7 +23,13 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/assets/"
+              },
+              {
+                "glob": "**/*.js",
+                "input": "node_modules/base64-js",
+                "output": "/assets/nm/"
               }
             ],
             "styles": [
@@ -50,13 +56,21 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": {
+                "scripts":true,
+                "styles": true,
+                "hidden": true,
+                "vendor": true
+            }
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "prebundle": false
+          },
           "configurations": {
             "production": {
               "buildTarget": "dynamic-asset-js-loading:build:production"
