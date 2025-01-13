@@ -1,9 +1,9 @@
 {
   "name": "nx-ng-dyn-import",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/nx-ng-dyn-import/src",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/nx-ng-dyn-import/src",
   "tags": [],
   "targets": {
     "build": {
@@ -19,10 +19,20 @@
           {
             "glob": "**/*",
             "input": "apps/nx-ng-dyn-import/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "node_modules/@redmedical/wc-date-time-box",
+            "output": "/assets/wc-date-time-box"
           }
         ],
         "styles": ["apps/nx-ng-dyn-import/src/styles.css"],
-        "scripts": []
+        "scripts": [],
+        "optimization": {
+          "scripts": true,
+          "styles": true,
+          "fonts": true
+        }
       },
       "configurations": {
         "production": {
@@ -41,15 +51,22 @@
           "outputHashing": "all"
         },
         "development": {
-          "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "optimization": false,
+          "namedChunks": true
         }
       },
-      "defaultConfiguration": "production"
+      "defaultConfiguration": "development"
+
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "buildTarget": "nx-ng-dyn-import:build",
+        "prebundle": false,
+        "port": 4201
+      },
       "configurations": {
         "production": {
           "buildTarget": "nx-ng-dyn-import:build:production"
