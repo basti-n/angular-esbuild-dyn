@@ -6,43 +6,22 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  private readonly loadedJsElements = new Set<
-    HTMLScriptElement | HTMLLinkElement
-  >();
+  private readonly loadedCssElements = new Set<HTMLLinkElement>();
 
   ngOnDestroy(): void {
-    this.loadedJsElements.forEach((script) => {
+    this.loadedCssElements.forEach((script) => {
       script.remove();
     });
   }
 
-  protected loadDynamicJs(): void {
-    const script = document.createElement('script');
-    script.src = 'assets/dynamic-js.js';
-    document.head.appendChild(script);
-    this.loadedJsElements.add(script);
-  }
-
-  protected loadDynamicJsRed(): void {
-    const script = document.createElement('script');
-    script.src = 'assets/web/main.js?version=2.0.0';
-    document.head.appendChild(script);
-    this.loadedJsElements.add(script);
-  }
-
-  protected loadDynamicJsRedNodeModules(): void {
-    const script = document.createElement('script');
-    script.src = 'assets/wc-date-time-box/main.js?version=2.0.0';
-    document.head.appendChild(script);
-    this.loadedJsElements.add(script);
-
-    const cssPath = 'assets/wc-date-time-box/styles.css';
+  protected loadCssAsset(): void {
+    const cssPath = 'assets/styles.css';
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.type = 'text/css';
     link.href = cssPath;
 
     document.head.appendChild(link);
-    this.loadedJsElements.add(link);
+    this.loadedCssElements.add(link);
   }
 }

@@ -18,12 +18,8 @@
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/nx-ng-dyn-import/public"
-          },
-          {
-            "glob": "**/*",
-            "input": "node_modules/@redmedical/wc-date-time-box",
-            "output": "/assets/wc-date-time-box"
+            "input": "apps/nx-ng-dyn-import/public",
+            "output": "/assets"
           }
         ],
         "styles": ["apps/nx-ng-dyn-import/src/styles.css"],
